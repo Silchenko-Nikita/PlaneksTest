@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block extrastyles %}
+    <style>
+        .title {
+            background: #dcd9ff;
+            width: 100%;
+            height: 100px;
+            overflow: auto;
+            text-align:justify;
+            padding-left: 15px;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+
+    <div>
+    {% for news in news %}
+        <div class="container">
+            <a href="{% url 'news-detail' news.pk %}" class="row title">
+                  {{ news.title }}
+              </a>
+            <div class="d-flex flex-row-reverse">
+                <p>Автор: <a href="{% url "guest-profile" news.author.pk %}">{{ news.author.email }}</a>
+                {% if news.author.first_name %}
+                    ({{ news.author.first_name }}
+                    {% if news.author.last_name %} {{ news.author.last_name }}){% endif %}{% endif %}.
+                Написана: {{ news.created|date:"H:i:s d/m/Y" }}
+                </p>
+            </div>
+        </div>
+        <hr>
+        {% endfor %}
+
+    </div>
+    {% if page_obj.has_previous or page_obj.has_next %}
+        <div class="d-flex flex-row-reverse container" style="margin-bottom: 15px;">
+                <span class="step-links">
+                    {% if page_obj.has_previous %}
+                        <a href="?page=1">&laquo;&laquo;&laquo;</a>
+                        <a href="?page={{ page_obj.previous_page_number }}">&laquo;</a>
+                    {% endif %}
+
+                    <span class="current">
+                        Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}.
+                    </span>
+
+                    {% if page_obj.has_next %}
+                        <a href="?page={{ page_obj.next_page_number }}">&raquo;</a>
+                        <a href="?page={{ page_obj.paginator.num_pages }}">&raquo;&raquo;&raquo;</a>
+                    {% endif %}
+                </span>
+            </div>
+    {% endif %}
+{% endblock %}

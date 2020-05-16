@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+
+    <div class="d-flex justify-content-center align-middle">
+        Ваш профиль ({{ request.user.email }}{% if request.user.first_name %} -
+        {{ request.user.first_name }}{% if request.user.last_name %} {{ request.user.last_name }}{% endif %}{% endif %})
+    </div>
+    <div class="container">
+{#        <div class="row">#}
+{#            <div class="col-2">#}
+{#                <img src="/media/{{ request.user.profile.avatar }}" width=140px" height="150px" alt="Аватар">#}
+{#            </div>#}
+{#            <div class="col-4">#}
+{#                <form method="post" action="{% url 'avatar-upload' %}" enctype="multipart/form-data">#}
+{#                    {% csrf_token %}#}
+{#                     <div class="form-group">#}
+{#                        <label for="id_avatar">Аватар: </label>#}
+{#                        {{ avatar_form.avatar}}#}
+{#                         <div class="form-group">#}
+{#                            {% for error in avatar_form.non_field_errors %}#}
+{#                                {{error}}#}
+{#                            {% endfor %}#}
+{#                            </div>#}
+{#                         <button type="submit" style="margin-top: 10px;" class="btn btn-primary">Подтвердить</button>#}
+{#                    </div>#}
+{#                </form>#}
+{#            </div>#}
+{#            <div class="col-4"></div>#}
+{#        </div>#}
+        <div class="row">
+            <div class="d-flex justify-content-center align-middle" style="margin-top: 8px;">
+                <form method="post">
+                  {% csrf_token %}
+                  <div class="form-group">
+                    <label for="id_first_name">Имя</label>
+                      {{ user_data_form.first_name|add_class:"form-control"|attr:'placeholder:Ваше имя' }}
+                      <small class="form-text text-muted">{{ form.email.errors }}</small>
+                  </div>
+                  <div class="form-group">
+                    <label for="id_last_name">Фамилия</label>
+                      {{ user_data_form.last_name|add_class:"form-control"|attr:'placeholder:Ваша фамилия' }}
+                      <small class="form-text text-muted">{{ form.password.errors }}</small>
+                  </div>
+                    <div class="form-group">
+                        <label for="id_birthday">Дата рождения</label>
+                          {{ user_data_form.birthday|add_class:"form-control"|attr:'placeholder:Ваша дата рождения'|attr:'type:date' }}
+                          <small class="form-text text-muted">{{ form.birthday.errors }}</small>
+                      </div>
+                    <div class="form-group">
+                    {% for error in user_data_form.non_field_errors %}
+                        {{error}}
+                    {% endfor %}
+                    </div>
+                  <button type="submit" style="margin-top: 20px;" class="btn btn-primary">Подтвердить</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

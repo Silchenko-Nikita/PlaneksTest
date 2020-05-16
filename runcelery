@@ -1,0 +1,3 @@
+celery -A PlaneksTest worker --loglevel=info -f celery.log --concurrency=1 &
+celery -A PlaneksTest beat --loglevel=info -f celery.logs &
+celery -A PlaneksTest flower --loglevel=info --port=5555 &

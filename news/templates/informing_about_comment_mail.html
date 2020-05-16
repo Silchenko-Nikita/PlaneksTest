@@ -1,0 +1,10 @@
+{% autoescape off %}
+    <div style="background: lightgreen">
+        Здравствуйте{% if news_author.first_name %} {{ news_author.firs_name }}{% endif %}, пользователь
+        {{ comment_author.email }}
+        {% if comment_author.first_name %}({{ comment_author.first_name }}
+            {% if comment_author.last_name %} {{ comment_author.last_name }}{% endif %}){% endif %}
+        на сайте Planeks News оставил комментарий к вашей новости
+        http://{{ domain }}{% url 'news-detail' pk=news_id %}
+    </div>
+{% endautoescape %}

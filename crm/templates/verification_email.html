@@ -1,0 +1,7 @@
+{% autoescape off %}
+    <div style="background: lightgreen">
+        Здравствуйте. вы зарегистрировались на сайте Planeks News
+        Нажмите на ссылку, чтобы активировать ваш профиль
+        http://{{ domain }}{% url 'activate' uidb64=uid token=token %}
+    </div>
+{% endautoescape %}

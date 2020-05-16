@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+
+    <div class="d-flex justify-content-center align-middle">
+        Профиль пользователя ({{ user.email }}{% if user.first_name %} -
+        {{ user.first_name }}{% if user.last_name %} {{ user.last_name }}{% endif %}{% endif %})
+    </div>
+    <div class="container">
+{#        <div class="row">#}
+{#            <div class="col-2">#}
+{#                <img src="/media/{{ request.user.profile.avatar }}" width=140px" height="150px" alt="Аватар">#}
+{#            </div>#}
+{#            <div class="col-4"></div>#}
+{#        </div>#}
+        <div class="row">
+            <div class="d-flex justify-content-center align-middle" style="margin-top: 8px;">
+                <div>
+                  <div class="form-group">
+                    <p for="id_first_name">Имя: {{ user.first_name }}</p>
+                  </div>
+                  <div class="form-group">
+                    <p for="id_last_name">Фамилия: {{ user.last_name}}</p>
+                  </div>
+                    <div class="form-group">
+                        <p for="id_last_name">Дата рождения: {{ user.profile.birthday|date:"d/m/Y" }}</p>
+                      </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,1 @@
+web: gunicorn PlaneksTest.wsgi --log-file -

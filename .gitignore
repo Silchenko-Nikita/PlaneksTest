@@ -1,0 +1,10 @@
+*.log
+*.logs
+*.pid
+*.pyc
+.idea/
+__pycache__/
+staticfiles
+.env
+venv
+local_settings.py
